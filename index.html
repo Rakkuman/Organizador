@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Organizacion</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="workspace" id="workspace">
+      <aside class="rail" id="rail">
+        <button class="avatar-button" id="toggleRail" title="Ocultar barra">
+          <span>OR</span>
+        </button>
+
+        <nav class="rail-nav" aria-label="Principal">
+          <button class="nav-icon finance is-active" title="Finanzas" aria-label="Finanzas" data-section="finance">
+            <img class="nav-svg" src="assets/finance-currency-dollar-svgrepo-com.svg" alt="" />
+          </button>
+          <button class="nav-icon work" title="Trabajo" aria-label="Trabajo" data-section="work">
+            <img class="nav-svg" src="assets/work-svgrepo-com.svg" alt="" />
+          </button>
+          <button class="nav-icon life" title="Vida" aria-label="Vida" data-section="life">
+            <img class="nav-svg" src="assets/life-svgrepo-com.svg" alt="" />
+          </button>
+          <button class="nav-icon calendar" title="Calendario" aria-label="Calendario" data-section="calendar">
+            <img class="nav-svg" src="assets/calendar-days-svgrepo-com.svg" alt="" />
+          </button>
+          <button class="nav-icon fitness" title="Fitness" aria-label="Fitness" data-section="fitness">
+            <img class="nav-svg" src="assets/fitness-centre-svgrepo-com.svg" alt="" />
+          </button>
+        </nav>
+
+        <div class="rail-footer">
+          <button title="Ajustes"></button>
+        </div>
+      </aside>
+
+      <section class="board">
+        <header class="top-strip">
+          <button class="window-dot"></button>
+          <div>
+            <p>Organizacion OS</p>
+            <h1 id="sectionTitle">Finanzas</h1>
+          </div>
+        </header>
+
+        <section class="card-grid view-section is-active" aria-label="Finanzas" data-view="finance">
+          <article class="tile hero-tile finance-balance-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Cuenta bancaria</p>
+                <h2>Monto actual</h2>
+              </div>
+              <span class="mini-badge">CLP</span>
+            </div>
+
+            <p class="balance-display" id="bankBalanceDisplay">$0</p>
+
+            <label class="field-label" for="bankBalanceInput">Editar monto</label>
+            <div class="money-editor">
+              <span>$</span>
+              <input
+                id="bankBalanceInput"
+                type="number"
+                inputmode="numeric"
+                min="0"
+                step="1000"
+                placeholder="Ej: 250000"
+              />
+              <button id="saveBankBalance" type="button">Guardar</button>
+            </div>
+          </article>
+          <article class="tile flow-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Flujo mensual</p>
+                <h2>Entradas y salidas</h2>
+              </div>
+              <span class="mini-badge">Auto</span>
+            </div>
+
+            <div class="flow-visual">
+              <div class="pie-chart" id="cashFlowPie" aria-label="Grafico de entradas y salidas">
+                <span id="cashFlowPercent">0%</span>
+              </div>
+              <div class="flow-summary">
+                <p><span class="legend-dot income"></span> Entradas <strong id="incomeTotal">$0</strong></p>
+                <p><span class="legend-dot expense"></span> Salidas <strong id="expenseTotal">$0</strong></p>
+                <p class="flow-result" id="flowResult">Balance $0</p>
+              </div>
+            </div>
+          </article>
+          <article class="tile expense-card expense-register-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Salidas</p>
+                <h2>Registro de gastos</h2>
+              </div>
+              <span class="mini-badge">CLP</span>
+            </div>
+
+            <p class="expense-display" id="expenseDisplay">$0</p>
+
+            <div class="expense-entry-form">
+              <label>
+                <span>Detalle</span>
+                <input id="expenseNameInput" type="text" placeholder="Ej: supermercado" />
+              </label>
+              <label>
+                <span>Monto</span>
+                <input
+                  id="expenseAmountInput"
+                  type="number"
+                  inputmode="numeric"
+                  min="0"
+                  step="1000"
+                  placeholder="Ej: 35000"
+                />
+              </label>
+              <button id="addExpense" type="button">Agregar</button>
+            </div>
+
+            <div class="expense-list" id="expenseList" aria-label="Registro de salidas"></div>
+          </article>
+          <article class="tile savings-card savings-rule-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Ahorro</p>
+                <h2>Metodo 50/30/20</h2>
+              </div>
+              <span class="mini-badge">Calculo</span>
+            </div>
+
+            <p class="savings-method">Distribucion sugerida del ingreso</p>
+            <p class="savings-copy">
+              Divide el dinero en necesidades, gustos y ahorro/deuda para tener una guia simple antes de gastar.
+            </p>
+
+            <div class="rule-grid">
+              <section class="rule-slice needs">
+                <span>50%</span>
+                <strong id="needsAmount">$0</strong>
+                <p>Necesidades: vivienda, comida, transporte, servicios y pagos obligatorios.</p>
+              </section>
+              <section class="rule-slice wants">
+                <span>30%</span>
+                <strong id="wantsAmount">$0</strong>
+                <p>Gustos: salidas, entretenimiento, compras no urgentes y comodidad personal.</p>
+              </section>
+              <section class="rule-slice savings">
+                <span>20%</span>
+                <strong id="savingsAmount">$0</strong>
+                <p>Ahorro o deuda: fondo de emergencia, inversiones o pagar deuda cara.</p>
+              </section>
+            </div>
+          </article>
+        </section>
+
+        <section class="card-grid view-section" aria-label="Trabajo" data-view="work">
+          <article class="tile work-focus-card work-priority-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Trabajo</p>
+                <h2>Prioridad laboral</h2>
+              </div>
+              <span class="mini-badge priority-badge">Importante</span>
+            </div>
+
+            <div class="work-priority-layout">
+              <div>
+                <p class="work-big-text" id="workPriorityTitle">Define el objetivo principal</p>
+                <p class="work-copy" id="workPriorityDescription">
+                  Este bloque marca el asunto mas importante de la jornada. Lo que pongamos aqui debe tener prioridad sobre el resto del trabajo.
+                </p>
+              </div>
+
+              <div class="work-priority-stack" id="workPriorityStack" aria-label="Pendientes prioritarios">
+                <span>Proyecto critico</span>
+                <span>Entrega principal</span>
+                <span>Seguimiento urgente</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile work-wide-card work-plan-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Plan</p>
+                <h2>Trabajos y entregas</h2>
+              </div>
+              <span class="mini-badge">Calendario</span>
+            </div>
+
+            <div class="work-plan-form">
+              <label>
+                <span>Trabajo</span>
+                <input id="workTaskName" type="text" placeholder="Ej: preparar propuesta" />
+              </label>
+              <label class="work-definition-field">
+                <span>Definicion</span>
+                <textarea id="workTaskDefinition" placeholder="Describe que hay que hacer, para quien es o que resultado se espera"></textarea>
+              </label>
+              <label>
+                <span>Importancia</span>
+                <select id="workTaskPriority">
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </label>
+              <label>
+                <span>Entrega</span>
+                <input id="workTaskDue" type="date" />
+              </label>
+              <button id="addWorkTask" type="button">Agregar</button>
+            </div>
+          </article>
+
+          <article class="tile work-wide-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Listado</p>
+                <h2>Todos los trabajos</h2>
+              </div>
+              <span class="mini-badge">Estado</span>
+            </div>
+            <div class="work-task-list" id="workTaskList" aria-label="Listado de trabajos"></div>
+          </article>
+        </section>
+
+        <section class="card-grid view-section" aria-label="Vida" data-view="life">
+          <article class="tile life-focus-card life-priority-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Vida</p>
+                <h2>Habitos atomicos</h2>
+              </div>
+              <span class="mini-badge life-badge" id="habitSummaryBadge">0%</span>
+            </div>
+
+            <div class="life-priority-layout">
+              <div>
+                <p class="life-big-text" id="habitSummaryTitle">Mejora 1% cada dia</p>
+                <p class="life-copy" id="habitSummaryDescription">
+                  Crea habitos pequenos, claros y faciles de repetir. La meta es construir identidad, no depender de motivacion.
+                </p>
+              </div>
+
+              <div class="life-priority-stack" id="habitSummaryStack" aria-label="Progreso de habitos">
+                <span>Senal clara</span>
+                <span>Accion pequena</span>
+                <span>Recompensa inmediata</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile life-wide-card habit-builder-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Crear</p>
+                <h2>Nuevo habito</h2>
+              </div>
+              <span class="mini-badge">Sistema</span>
+            </div>
+
+            <div class="habit-form">
+              <label>
+                <span>Habito</span>
+                <input id="habitName" type="text" placeholder="Ej: caminar 10 minutos" />
+              </label>
+              <label>
+                <span>Identidad</span>
+                <input id="habitIdentity" type="text" placeholder="Soy una persona que cuida su salud" />
+              </label>
+              <label>
+                <span>Senal</span>
+                <input id="habitCue" type="text" placeholder="Despues de desayunar" />
+              </label>
+              <label>
+                <span>Accion minima</span>
+                <input id="habitAction" type="text" placeholder="Caminar solo 5 minutos si el dia esta dificil" />
+              </label>
+              <label>
+                <span>Recompensa</span>
+                <input id="habitReward" type="text" placeholder="Marcarlo como hecho y tomar agua" />
+              </label>
+              <label>
+                <span>Area</span>
+                <select id="habitCategory">
+                  <option value="Salud">Salud</option>
+                  <option value="Mente">Mente</option>
+                  <option value="Orden">Orden</option>
+                  <option value="Relaciones">Relaciones</option>
+                </select>
+              </label>
+              <button id="addHabit" type="button">Agregar</button>
+            </div>
+          </article>
+
+          <article class="tile life-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Hoy</p>
+                <h2>Progreso diario</h2>
+              </div>
+              <span class="mini-badge">Check</span>
+            </div>
+            <div class="habit-score">
+              <strong id="habitDoneCount">0/0</strong>
+              <span>habitos completados</span>
+            </div>
+            <p class="life-copy" id="habitCoachNote">
+              Empieza con una accion tan pequena que sea dificil fallar. La constancia gana fuerza con repeticion.
+            </p>
+          </article>
+
+          <article class="tile life-wide-card journal-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Diario</p>
+                <h2>Registro de progreso</h2>
+              </div>
+              <span class="mini-badge">Hoy</span>
+            </div>
+
+            <div class="journal-form">
+              <label>
+                <span>Energia</span>
+                <select id="journalEnergy">
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </label>
+              <label class="journal-wide-field">
+                <span>Que progreso tuviste hoy?</span>
+                <textarea id="journalProgress" placeholder="Ej: complete mis habitos, ordene mi pieza, camine 20 minutos"></textarea>
+              </label>
+              <label class="journal-wide-field">
+                <span>Que aprendiste o que puedes mejorar?</span>
+                <textarea id="journalLesson" placeholder="Ej: si preparo la ropa antes, me cuesta menos entrenar"></textarea>
+              </label>
+              <button id="saveJournalEntry" type="button">Guardar diario</button>
+            </div>
+          </article>
+
+          <article class="tile life-wide-card journal-history-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Historial</p>
+                <h2>Progresos guardados</h2>
+              </div>
+              <span class="mini-badge">Memoria</span>
+            </div>
+            <div class="journal-list" id="journalList" aria-label="Historial del diario"></div>
+          </article>
+
+          <article class="tile life-wide-card habit-list-card">
+            <div class="tile-head">
+              <div>
+                <p class="eyebrow">Listado</p>
+                <h2>Mis habitos</h2>
+              </div>
+              <span class="mini-badge">Diario</span>
+            </div>
+            <div class="habit-list" id="habitList" aria-label="Listado de habitos"></div>
+          </article>
+        </section>
+      </section>
+
+      <aside class="detail-panel daily-panel">
+        <p class="eyebrow">Hoy</p>
+        <h2>Agenda diaria</h2>
+        <p class="daily-date" id="dailyDate">--</p>
+        <p class="daily-clock" id="dailyClock">--:--</p>
+
+        <div class="daily-form">
+          <label>
+            <span>Tarea</span>
+            <input id="dailyTaskText" type="text" placeholder="Ej: revisar pagos" />
+          </label>
+          <button id="addDailyTask" type="button">Agregar</button>
+        </div>
+
+        <div class="daily-task-list" id="dailyTaskList" aria-label="Tareas del dia"></div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
